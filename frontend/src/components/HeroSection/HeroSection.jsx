@@ -1,12 +1,42 @@
 import { useEffect, useMemo, useState } from "react";
-import { MapPin, Search } from "lucide-react";
+import { ChevronLeft, ChevronRight, MapPin, Search } from "lucide-react";
 import { fetchPlatformStats } from "@/lib/api";
 import styles from "./HeroSection.module.css";
 
 const HeroSection = () => {
+  const featuredProjects = useMemo(
+    () => [
+      {
+        id: "elahiye-renovation",
+        title: "بازسازی کامل آپارتمان الهیه",
+        description: "اتمام پروژه در ۴۵ روز با امتیاز ۴.۹ از مشتری",
+        image:
+          "https://images.unsplash.com/photo-1505691723518-36a5ac3be353?auto=format&fit=crop&w=1200&q=80",
+        badge: "پروژه منتخب این هفته",
+      },
+      {
+        id: "pasdaran-kitchen",
+        title: "نوسازی آشپزخانه مدرن در پاسداران",
+        description: "بازطراحی کامل با متریال سفارشی و تحویل در ۲۸ روز",
+        image:
+          "https://images.unsplash.com/photo-1505691938895-1758d7feb511?auto=format&fit=crop&w=1200&q=80",
+        badge: "بازدید برتر کاربران",
+      },
+      {
+        id: "farmanieh-villa",
+        title: "بازسازی ویلای کلاسیک در فرشته",
+        description: "ترکیب سبک کلاسیک و مدرن با رضایت ۱۰۰٪ مشتری",
+        image:
+          "https://images.unsplash.com/photo-1484154218962-a197022b5858?auto=format&fit=crop&w=1200&q=80",
+        badge: "پروژه ویژه تیم حرفه‌ای",
+      },
+    ],
+    []
+  );
   const [stats, setStats] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [currentProjectIndex, setCurrentProjectIndex] = useState(0);
 
   useEffect(() => {
     let isSubscribed = true;
@@ -39,6 +69,26 @@ const HeroSection = () => {
       isSubscribed = false;
     };
   }, []);
+
+  useEffect(() => {
+    if (featuredProjects.length <= 1) {
+      return undefined;
+    }
+
+    const interval = setInterval(() => {
+      setCurrentProjectIndex((prev) => (prev + 1) % featuredProjects.length);
+    }, 6000);
+
+    return () => {
+      clearInterval(interval);
+    };
+  }, [featuredProjects.length]);
+
+  const goToProject = (nextIndex) => {
+    setCurrentProjectIndex((nextIndex + featuredProjects.length) % featuredProjects.length);
+  };
+
+  const activeProject = featuredProjects[currentProjectIndex];
 
   const formattedStats = useMemo(() => {
     const formatter = new Intl.NumberFormat("fa-IR");
@@ -140,6 +190,69 @@ const HeroSection = () => {
                   </div>
                 </>
               )}
+            </div>
+          </div>
+
+          <div className={styles.visual}>
+            <div className={styles.visualSlider}>
+              <div key={activeProject.id} className={styles.visualCard}>
+                <img
+                  src={activeProject.image}
+                  alt={activeProject.title}
+                  className={styles.visualImage}
+                  loading="lazy"
+                />
+                <span className={styles.visualBadge}>{activeProject.badge}</span>
+                <div className={styles.visualCaption}>
+                  <h3>{activeProject.title}</h3>
+                  <p>{activeProject.description}</p>
+                </div>
+              </div>
+
+              <div className={styles.sliderControls}>
+                <button
+                  type="button"
+                  className={styles.sliderButton}
+                  onClick={() => goToProject(currentProjectIndex - 1)}
+                  aria-label="پروژه قبلی"
+                >
+                  <ChevronRight size={18} aria-hidden="true" />
+                </button>
+                <button
+                  type="button"
+                  className={styles.sliderButton}
+                  onClick={() => goToProject(currentProjectIndex + 1)}
+                  aria-label="پروژه بعدی"
+                >
+                  <ChevronLeft size={18} aria-hidden="true" />
+                </button>
+              </div>
+
+              <div className={styles.sliderDots} role="tablist" aria-label="پروژه‌های منتخب">
+                {featuredProjects.map((project, index) => (
+                  <button
+                    key={project.id}
+                    type="button"
+                    className={`${styles.sliderDot} ${
+                      index === currentProjectIndex ? styles.sliderDotActive : ""
+                    }`}
+                    onClick={() => goToProject(index)}
+                    aria-label={`نمایش ${project.title}`}
+                    aria-selected={index === currentProjectIndex}
+                    role="tab"
+                  />
+                ))}
+              </div>
+            </div>
+            <div className={styles.visualStats}>
+              <div className={styles.visualStat}>
+                <span className={styles.visualStatLabel}>میانگین تحویل پروژه</span>
+                <span className={styles.visualStatValue}>۲۱ روز</span>
+              </div>
+              <div className={styles.visualStat}>
+                <span className={styles.visualStatLabel}>پروژه‌های فعال امروز</span>
+                <span className={styles.visualStatValue}>+۱۸</span>
+              </div>
             </div>
           </div>
         </div>
