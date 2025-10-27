@@ -1,3 +1,5 @@
+@import url("https://cdn.jsdelivr.net/gh/rastikerdar/vazir-font@v30.1.0/dist/font-face.css");
+
 :root {
   --background: 0 0% 100%;
   --foreground: 240 10% 3.9%;
@@ -107,7 +109,7 @@ body {
   min-height: 100vh;
   background-color: hsl(var(--background));
   color: hsl(var(--foreground));
-  font-family: "IRANSans", "IranSans", "IRANSansWeb", sans-serif;
+  font-family: "Vazir", "IRANSans", "IranSans", "IRANSansWeb", sans-serif;
   font-feature-settings: "cv11", "ss01";
   direction: rtl;
 }

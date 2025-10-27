@@ -51,6 +51,8 @@
   width: 100%;
   padding-top: 6rem;
   padding-bottom: 4rem;
+  display: grid;
+  gap: 3rem;
 }
 
 @media (min-width: 640px) {
@@ -60,9 +62,98 @@
   }
 }
 
+@media (min-width: 1024px) {
+  .contentWrapper {
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+    align-items: center;
+  }
+}
+
 .content {
   max-width: 48rem;
   animation: fadeIn 0.6s ease-out both;
+}
+
+.visual {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  animation: slideUp 0.8s ease-out both;
+}
+
+.visualCard {
+  position: relative;
+  border-radius: 2rem;
+  overflow: hidden;
+  box-shadow: var(--shadow-large);
+  border: 1px solid hsl(var(--border) / 0.4);
+}
+
+.visualImage {
+  display: block;
+  width: 100%;
+  height: clamp(300px, 45vw, 420px);
+  object-fit: cover;
+}
+
+.visualBadge {
+  position: absolute;
+  top: 1.25rem;
+  right: 1.25rem;
+  padding: 0.5rem 1.25rem;
+  border-radius: 9999px;
+  background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary) / 0.8));
+  color: hsl(var(--primary-foreground));
+  font-weight: 600;
+  box-shadow: 0 15px 35px -25px hsl(var(--primary));
+}
+
+.visualCaption {
+  position: absolute;
+  inset: auto 0 0;
+  padding: 1.75rem;
+  background: linear-gradient(180deg, transparent 0%, rgba(15, 23, 42, 0.85) 60%);
+  color: #f8fafc;
+}
+
+.visualCaption h3 {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.visualCaption p {
+  margin-top: 0.5rem;
+  font-size: 0.95rem;
+  color: rgba(241, 245, 249, 0.85);
+}
+
+.visualStats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 1rem;
+}
+
+.visualStat {
+  padding: 1.15rem 1.25rem;
+  border-radius: 1.25rem;
+  background: linear-gradient(135deg, hsl(var(--card)), hsl(var(--muted) / 0.2));
+  border: 1px solid hsl(var(--border) / 0.4);
+  box-shadow: var(--shadow-medium);
+}
+
+.visualStatLabel {
+  display: block;
+  font-size: 0.85rem;
+  color: hsl(var(--muted-foreground));
+  margin-bottom: 0.35rem;
+}
+
+.visualStatValue {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: hsl(var(--primary));
 }
 
 .title {
