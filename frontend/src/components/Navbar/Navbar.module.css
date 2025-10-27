@@ -281,6 +281,18 @@
   }
 }
 
+.brand {
+  font-weight: 700;
+  font-size: 1.25rem;
+  color: hsl(var(--foreground));
+}
+
+@media (min-width: 640px) {
+  .brand {
+    font-size: 1.5rem;
+  }
+}
+
 .mobileContent {
   padding: 1.5rem;
   display: flex;
