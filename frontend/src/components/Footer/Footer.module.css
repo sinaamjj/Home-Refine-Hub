@@ -1,6 +1,11 @@
 .footer {
-  background-color: hsl(var(--card));
-  border-top: 1px solid hsl(var(--border) / 0.5);
+  background-color: #FFFFFF;
+  border-top: 1px solid #E4E4E780;
+}
+
+:global(.dark) :local(.footer) {
+  background-color: #101014;
+  border-top: 1px solid #27272A80;
 }
 
 .content {
@@ -41,8 +46,12 @@
 
 .description {
   font-size: 0.95rem;
-  color: hsl(var(--muted-foreground));
+  color: #71717A;
   line-height: 1.6;
+}
+
+:global(.dark) :local(.description) {
+  color: #A1A1AA;
 }
 
 .socials {
@@ -61,17 +70,22 @@
   width: 36px;
   height: 36px;
   border-radius: 9999px;
-  background-color: hsl(var(--muted));
+  background-color: #F4F4F5;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  color: hsl(var(--foreground));
+  color: #09090B;
   transition: background-color 0.2s ease, color 0.2s ease;
 }
 
+:global(.dark) :local(.socialLink) {
+  background-color: #27272A;
+  color: #FAFAFA;
+}
+
 .socialLink:hover {
-  background-color: hsl(var(--primary));
-  color: hsl(var(--primary-foreground));
+  background-color: #16A34A;
+  color: #FFFFFF;
 }
 
 .columnTitle {
@@ -84,7 +98,11 @@
   flex-direction: column;
   gap: 0.5rem;
   font-size: 0.9rem;
-  color: hsl(var(--muted-foreground));
+  color: #71717A;
+}
+
+:global(.dark) :local(.linkList) {
+  color: #A1A1AA;
 }
 
 .link {
@@ -93,13 +111,22 @@
 }
 
 .link:hover {
-  color: hsl(var(--foreground));
+  color: #09090B;
+}
+
+:global(.dark) :local(.link:hover) {
+  color: #FAFAFA;
 }
 
 .bottomBar {
-  border-top: 1px solid hsl(var(--border) / 0.5);
+  border-top: 1px solid #E4E4E780;
   padding: 1.5rem 0;
   text-align: center;
   font-size: 0.85rem;
-  color: hsl(var(--muted-foreground));
+  color: #71717A;
+}
+
+:global(.dark) :local(.bottomBar) {
+  border-top: 1px solid #27272A80;
+  color: #A1A1AA;
 }

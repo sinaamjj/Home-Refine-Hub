@@ -2,8 +2,13 @@
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  background-color: hsl(var(--background));
-  color: hsl(var(--foreground));
+  background-color: #FFFFFF;
+  color: #09090B;
+}
+
+:global(.dark) :local(.page) {
+  background-color: #09090B;
+  color: #FAFAFA;
 }
 
 .main {

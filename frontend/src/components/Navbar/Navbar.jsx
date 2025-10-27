@@ -1,4 +1,5 @@
 import { useEffect, useState, useCallback } from "react";
+import PropTypes from "prop-types";
 import { Moon, Sun, Menu, LogIn, X } from "lucide-react";
 import styles from "./Navbar.module.css";
 
@@ -9,7 +10,7 @@ const navLinks = [
   { href: "#about", label: "درباره ما" },
 ];
 
-const Navbar = () => {
+const Navbar = ({ onProfessionalSignUp, onNavigateHome }) => {
   const [isDark, setIsDark] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -92,15 +93,44 @@ const Navbar = () => {
     setIsMobileMenuOpen((prev) => !prev);
   }, []);
 
+  const handleProfessionalSignUp = useCallback(() => {
+    if (onProfessionalSignUp) {
+      onProfessionalSignUp();
+    }
+  }, [onProfessionalSignUp]);
+
+  const handleNavigateHome = useCallback(
+    (hash) => {
+      if (onNavigateHome) {
+        onNavigateHome(hash);
+      }
+    },
+    [onNavigateHome]
+  );
+
   return (
     <nav className={`${styles.navbar} ${isScrolled ? styles.scrolled : ""}`}>
       <div className="container">
         <div className={styles.inner}>
-          <div className={styles.brand}>بازچین</div>
+          <button
+            type="button"
+            className={styles.brandButton}
+            onClick={() => handleNavigateHome()}
+          >
+            بازچین
+          </button>
 
           <div className={styles.links}>
             {navLinks.map((link) => (
-              <a key={link.href} href={link.href} className={styles.link}>
+              <a
+                key={link.href}
+                href={link.href}
+                className={styles.link}
+                onClick={(event) => {
+                  event.preventDefault();
+                  handleNavigateHome(link.href);
+                }}
+              >
                 {link.label}
               </a>
             ))}
@@ -119,7 +149,11 @@ const Navbar = () => {
               <LogIn size={16} />
               ورود
             </button>
-            <button type="button" className={styles.primaryButton}>
+            <button
+              type="button"
+              className={styles.primaryButton}
+              onClick={handleProfessionalSignUp}
+            >
               ثبت‌نام متخصصین
             </button>
             <button
@@ -168,7 +202,11 @@ const Navbar = () => {
                 key={link.href}
                 href={link.href}
                 className={styles.mobileNavLink}
-                onClick={() => setIsMobileMenuOpen(false)}
+                onClick={(event) => {
+                  event.preventDefault();
+                  setIsMobileMenuOpen(false);
+                  handleNavigateHome(link.href);
+                }}
               >
                 {link.label}
               </a>
@@ -181,7 +219,10 @@ const Navbar = () => {
             <button
               type="button"
               className={styles.mobileSecondaryButton}
-              onClick={() => setIsMobileMenuOpen(false)}
+              onClick={() => {
+                setIsMobileMenuOpen(false);
+                handleProfessionalSignUp();
+              }}
             >
               ثبت‌نام متخصصین
             </button>
@@ -200,6 +241,16 @@ const Navbar = () => {
       </aside>
     </nav>
   );
+};
+
+Navbar.propTypes = {
+  onProfessionalSignUp: PropTypes.func,
+  onNavigateHome: PropTypes.func,
+};
+
+Navbar.defaultProps = {
+  onProfessionalSignUp: undefined,
+  onNavigateHome: undefined,
 };
 
 export default Navbar;
