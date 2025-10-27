@@ -4,6 +4,8 @@ import { fetchPlatformStats } from "@/lib/api";
 import styles from "./HeroSection.module.css";
 
 const HeroSection = () => {
+  const heroImageUrl =
+    "https://images.unsplash.com/photo-1505691938895-1758d7feb511?auto=format&fit=crop&w=1200&q=80";
   const [stats, setStats] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -140,6 +142,32 @@ const HeroSection = () => {
                   </div>
                 </>
               )}
+            </div>
+          </div>
+
+          <div className={styles.visual}>
+            <div className={styles.visualCard}>
+              <img
+                src={heroImageUrl}
+                alt="پروژه بازسازی مدرن منزل"
+                className={styles.visualImage}
+                loading="lazy"
+              />
+              <span className={styles.visualBadge}>پروژه منتخب این هفته</span>
+              <div className={styles.visualCaption}>
+                <h3>بازسازی کامل آپارتمان الهیه</h3>
+                <p>اتمام پروژه در ۴۵ روز با امتیاز ۴.۹ از مشتری</p>
+              </div>
+            </div>
+            <div className={styles.visualStats}>
+              <div className={styles.visualStat}>
+                <span className={styles.visualStatLabel}>میانگین تحویل پروژه</span>
+                <span className={styles.visualStatValue}>۲۱ روز</span>
+              </div>
+              <div className={styles.visualStat}>
+                <span className={styles.visualStatLabel}>پروژه‌های فعال امروز</span>
+                <span className={styles.visualStatValue}>+۱۸</span>
+              </div>
             </div>
           </div>
         </div>
