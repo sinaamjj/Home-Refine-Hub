@@ -1,10 +1,12 @@
 .overlay {
   position: fixed;
   inset: 0;
+  top: 60px;
   z-index: 60;
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 1.5rem;
 }
 
 .backdrop {
@@ -26,6 +28,9 @@
   flex-direction: column;
   gap: 2rem;
   animation: scaleIn 0.28s ease-out;
+  max-height: calc(100vh - 7.5rem);
+  overflow-y: auto;
+  box-sizing: border-box;
 }
 
 :global(.dark) :local(.modal) {
@@ -156,6 +161,29 @@
 
 :global(.dark) :local(.optionContent h3) {
   color: #FAFAFA;
+}
+
+@media (max-width: 768px) {
+  .overlay {
+    padding: 1.25rem;
+  }
+
+  .modal {
+    border-radius: 1.5rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .overlay {
+    align-items: flex-start;
+    padding: 1.25rem 1rem 2rem;
+  }
+
+  .modal {
+    width: 100%;
+    margin: 0 auto;
+    max-height: calc(100vh - 3.5rem);
+  }
 }
 
 .optionContent p {

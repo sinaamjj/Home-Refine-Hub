@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import PropTypes from "prop-types";
 import { ArrowRight, BadgeCheck, Building2, CheckCircle2, ShieldCheck, Sparkles, UserPlus } from "lucide-react";
 import homeStyles from "@/styles/Home.module.css";
@@ -115,6 +115,8 @@ const customerFields = [
 const RegisterPage = ({ role, onRoleChange, onNavigateHome }) => {
   const [formValues, setFormValues] = useState({});
   const [status, setStatus] = useState(null);
+  const [errors, setErrors] = useState({});
+  const [touchedFields, setTouchedFields] = useState({});
 
   const fields = useMemo(
     () => (role === "customer" ? customerFields : professionalFields),
@@ -126,21 +128,158 @@ const RegisterPage = ({ role, onRoleChange, onNavigateHome }) => {
   useEffect(() => {
     setFormValues({});
     setStatus(null);
+    setErrors({});
+    setTouchedFields({});
   }, [role]);
+
+  const getFieldError = useCallback((name, value, values) => {
+    const stringValue = typeof value === "string" ? value.trim() : value;
+
+    switch (name) {
+      case "fullName": {
+        if (!stringValue) {
+          return "وارد کردن نام الزامی است.";
+        }
+        if (!/^[\u0600-\u06FFa-zA-Z\s]+$/.test(stringValue)) {
+          return "لطفاً فقط حروف فارسی یا لاتین وارد کنید.";
+        }
+        return undefined;
+      }
+      case "city": {
+        if (!stringValue) {
+          return "انتخاب شهر الزامی است.";
+        }
+        if (!/^[\u0600-\u06FFa-zA-Z\s]+$/.test(stringValue)) {
+          return "نام شهر باید فقط شامل حروف باشد.";
+        }
+        return undefined;
+      }
+      case "phone": {
+        if (!stringValue) {
+          return "شماره همراه خود را وارد کنید.";
+        }
+        if (!/^0\d{10}$/.test(stringValue)) {
+          return "شماره همراه معتبر وارد کنید.";
+        }
+        return undefined;
+      }
+      case "email": {
+        if (!stringValue) {
+          return "ایمیل خود را وارد کنید.";
+        }
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(stringValue)) {
+          return "ایمیل وارد شده معتبر نیست.";
+        }
+        return undefined;
+      }
+      case "password": {
+        if (!stringValue) {
+          return "رمز عبور را وارد کنید.";
+        }
+        if (stringValue.length < 8) {
+          return "رمز عبور باید حداقل ۸ کاراکتر باشد.";
+        }
+        return undefined;
+      }
+      case "confirmPassword": {
+        if (!stringValue) {
+          return "تکرار رمز عبور الزامی است.";
+        }
+        if (values.password && stringValue !== values.password) {
+          return "رمز عبور و تکرار آن یکسان نیست.";
+        }
+        return undefined;
+      }
+      case "bio":
+      case "preferredServices": {
+        if (!stringValue) {
+          return "توضیح این بخش را تکمیل کنید.";
+        }
+        if (stringValue.length < 10) {
+          return "لطفاً توضیحات کامل‌تری وارد کنید.";
+        }
+        return undefined;
+      }
+      case "serviceCategory":
+      case "experience":
+      case "propertyType": {
+        if (!stringValue) {
+          return "لطفاً یک گزینه را انتخاب کنید.";
+        }
+        return undefined;
+      }
+      default: {
+        if (!stringValue) {
+          return "پر کردن این فیلد الزامی است.";
+        }
+        return undefined;
+      }
+    }
+  }, []);
+
+  const updateFieldError = useCallback(
+    (currentErrors, fieldName, values) => {
+      const nextErrors = { ...currentErrors };
+      const message = getFieldError(fieldName, values[fieldName], values);
+      if (message) {
+        nextErrors[fieldName] = message;
+      } else {
+        delete nextErrors[fieldName];
+      }
+      return nextErrors;
+    },
+    [getFieldError]
+  );
 
   const handleChange = (event) => {
     const { name, value } = event.target;
-    setFormValues((prev) => ({ ...prev, [name]: value }));
+    const nextValues = { ...formValues, [name]: value };
+    setFormValues(nextValues);
+
+    if (touchedFields[name]) {
+      setErrors((prev) => updateFieldError(prev, name, nextValues));
+    }
+
+    if (name === "password" && touchedFields.confirmPassword) {
+      setErrors((prev) => updateFieldError(prev, "confirmPassword", nextValues));
+    }
+  };
+
+  const handleBlur = (event) => {
+    const { name } = event.target;
+    const updatedTouched = { ...touchedFields, [name]: true };
+    setTouchedFields(updatedTouched);
+    setErrors((prev) => updateFieldError(prev, name, formValues));
+
+    if (name === "password" && updatedTouched.confirmPassword) {
+      setErrors((prev) => updateFieldError(prev, "confirmPassword", formValues));
+    }
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    if (formValues.password && formValues.password !== formValues.confirmPassword) {
-      setStatus({ type: "error", message: "رمز عبور و تکرار آن یکسان نیست" });
+    const validationMap = fields.reduce((acc, field) => {
+      acc[field.name] = true;
+      return acc;
+    }, {});
+    setTouchedFields(validationMap);
+
+    const nextErrors = fields.reduce((acc, field) => {
+      const message = getFieldError(field.name, formValues[field.name], formValues);
+      if (message) {
+        acc[field.name] = message;
+      }
+      return acc;
+    }, {});
+
+    if (Object.keys(nextErrors).length > 0) {
+      setErrors(nextErrors);
+      setStatus({ type: "error", message: "لطفاً خطاهای فرم را برطرف کنید." });
       return;
     }
 
+    setErrors({});
     setStatus({
       type: "success",
       message: "درخواست شما با موفقیت ثبت شد. تیم پشتیبانی به زودی با شما تماس می‌گیرد.",
@@ -148,6 +287,10 @@ const RegisterPage = ({ role, onRoleChange, onNavigateHome }) => {
   };
 
   const renderField = (field) => {
+    const error = errors[field.name];
+    const isInvalid = Boolean(error);
+    const errorId = isInvalid ? `${field.name}-error` : undefined;
+
     if (field.type === "select") {
       return (
         <label key={field.name} className={styles.field}>
@@ -155,9 +298,12 @@ const RegisterPage = ({ role, onRoleChange, onNavigateHome }) => {
           <div className={styles.selectWrapper}>
             <select
               name={field.name}
-              className={styles.select}
+              className={`${styles.select} ${isInvalid ? styles.inputError : ""}`}
               value={formValues[field.name] ?? ""}
               onChange={handleChange}
+              onBlur={handleBlur}
+              aria-invalid={isInvalid}
+              aria-describedby={errorId}
             >
               <option value="" disabled>
                 انتخاب کنید
@@ -168,6 +314,11 @@ const RegisterPage = ({ role, onRoleChange, onNavigateHome }) => {
                 </option>
               ))}
             </select>
+            {isInvalid ? (
+              <span id={errorId} className={styles.fieldError}>
+                {error}
+              </span>
+            ) : null}
           </div>
         </label>
       );
@@ -179,12 +330,20 @@ const RegisterPage = ({ role, onRoleChange, onNavigateHome }) => {
           <span className={styles.fieldLabel}>{field.label}</span>
           <textarea
             name={field.name}
-            className={`${styles.input} ${styles.textarea}`}
+            className={`${styles.input} ${styles.textarea} ${isInvalid ? styles.inputError : ""}`}
             rows={field.rows ?? 3}
             placeholder={field.placeholder}
             value={formValues[field.name] ?? ""}
             onChange={handleChange}
+            onBlur={handleBlur}
+            aria-invalid={isInvalid}
+            aria-describedby={errorId}
           />
+          {isInvalid ? (
+            <span id={errorId} className={styles.fieldError}>
+              {error}
+            </span>
+          ) : null}
         </label>
       );
     }
@@ -195,12 +354,20 @@ const RegisterPage = ({ role, onRoleChange, onNavigateHome }) => {
         <input
           name={field.name}
           type={field.type}
-          className={styles.input}
+          className={`${styles.input} ${isInvalid ? styles.inputError : ""}`}
           placeholder={field.placeholder}
           autoComplete={field.autoComplete}
           value={formValues[field.name] ?? ""}
           onChange={handleChange}
+          onBlur={handleBlur}
+          aria-invalid={isInvalid}
+          aria-describedby={errorId}
         />
+        {isInvalid ? (
+          <span id={errorId} className={styles.fieldError}>
+            {error}
+          </span>
+        ) : null}
       </label>
     );
   };

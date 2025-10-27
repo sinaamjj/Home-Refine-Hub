@@ -160,11 +160,11 @@ const Navbar = ({ onProfessionalSignUp, onNavigateHome }) => {
               type="button"
               className={styles.mobileToggle}
               onClick={toggleMobileMenu}
-              aria-label="باز کردن منو"
+              aria-label={isMobileMenuOpen ? "بستن منو" : "باز کردن منو"}
               aria-expanded={isMobileMenuOpen}
               aria-controls="mobile-navigation"
             >
-              <Menu size={20} />
+              {isMobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
             </button>
           </div>
         </div>
