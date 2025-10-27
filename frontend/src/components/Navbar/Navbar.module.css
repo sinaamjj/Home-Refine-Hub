@@ -1,0 +1,262 @@
+.navbar {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  width: 100%;
+  z-index: 100;
+  background-color: hsl(var(--background) / 0.3);
+  backdrop-filter: blur(12px);
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.scrolled {
+  background-color: hsl(var(--background) / 0.6);
+  box-shadow: var(--shadow-soft);
+}
+
+.inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 64px;
+  gap: 1rem;
+}
+
+@media (min-width: 640px) {
+  .inner {
+    height: 80px;
+  }
+}
+
+.brand {
+  font-weight: 700;
+  font-size: 1.25rem;
+  color: hsl(var(--foreground));
+}
+
+@media (min-width: 640px) {
+  .brand {
+    font-size: 1.5rem;
+  }
+}
+
+.links {
+  display: none;
+  align-items: center;
+  gap: 2rem;
+}
+
+@media (min-width: 768px) {
+  .links {
+    display: flex;
+  }
+}
+
+.link {
+  color: hsl(var(--foreground) / 0.8);
+  font-size: 0.95rem;
+  transition: color 0.2s ease;
+}
+
+.link:hover {
+  color: hsl(var(--foreground));
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.iconButton {
+  width: 40px;
+  height: 40px;
+  border-radius: 9999px;
+  border: 1px solid hsl(var(--border));
+  background-color: transparent;
+  color: hsl(var(--foreground));
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.iconButton:hover {
+  background-color: hsl(var(--muted));
+}
+
+.outlineButton {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  padding: 0.6rem 1.2rem;
+  border-radius: 9999px;
+  border: 1px solid hsl(var(--border));
+  background-color: hsl(var(--background));
+  color: hsl(var(--foreground));
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+@media (min-width: 640px) {
+  .outlineButton {
+    display: inline-flex;
+  }
+}
+
+.outlineButton:hover {
+  border-color: hsl(var(--primary));
+  color: hsl(var(--primary));
+}
+
+.primaryButton {
+  padding: 0.6rem 1.4rem;
+  border-radius: 9999px;
+  border: none;
+  background-image: var(--gradient-hero);
+  color: hsl(var(--primary-foreground));
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+  font-weight: 600;
+}
+
+.primaryButton:hover {
+  opacity: 0.9;
+}
+
+.mobileToggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 9999px;
+  border: 1px solid hsl(var(--border));
+  background-color: transparent;
+  color: hsl(var(--foreground));
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.mobileToggle:hover {
+  background-color: hsl(var(--muted));
+}
+
+@media (min-width: 768px) {
+  .mobileToggle {
+    display: none;
+  }
+}
+
+.mobileOverlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  z-index: 90;
+}
+
+.mobileOverlayVisible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.mobileMenu {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  width: min(320px, 90%);
+  background-color: hsl(var(--background));
+  border-left: 1px solid hsl(var(--border) / 0.5);
+  box-shadow: var(--shadow-large);
+  transform: translateX(100%);
+  transition: transform 0.3s ease;
+  z-index: 95;
+  display: flex;
+  flex-direction: column;
+}
+
+.mobileMenuOpen {
+  transform: translateX(0);
+}
+
+.mobileHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid hsl(var(--border) / 0.5);
+}
+
+.mobileContent {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  overflow-y: auto;
+}
+
+.mobileNav {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.mobileNavLink {
+  font-size: 1.05rem;
+  color: hsl(var(--foreground) / 0.85);
+  transition: color 0.2s ease;
+}
+
+.mobileNavLink:hover {
+  color: hsl(var(--foreground));
+}
+
+.mobileActions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.mobileSecondaryButton,
+.mobileOutlineButton,
+.mobileThemeButton {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border-radius: 9999px;
+  border: 1px solid hsl(var(--border));
+  background-color: hsl(var(--background));
+  color: hsl(var(--foreground));
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.mobileSecondaryButton {
+  border: none;
+  background-image: var(--gradient-hero);
+  color: hsl(var(--primary-foreground));
+}
+
+.mobileSecondaryButton:hover {
+  opacity: 0.9;
+}
+
+.mobileOutlineButton:hover {
+  border-color: hsl(var(--primary));
+  color: hsl(var(--primary));
+}
+
+.mobileThemeButton {
+  background-color: hsl(var(--muted));
+  border: none;
+}
+
+.mobileThemeButton:hover {
+  filter: brightness(0.95);
+}
