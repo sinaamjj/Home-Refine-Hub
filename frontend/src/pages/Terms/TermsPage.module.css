@@ -3,16 +3,18 @@
   flex-direction: column;
   gap: 32px;
   padding: 120px 24px 72px;
-  background: linear-gradient(180deg, #0f172a 0%, #0f172a 12%, #f8fafc 12%, #ffffff 100%);
+  background: linear-gradient(180deg, #ffffff 0%, #f8fafc 50%, #ffffff 100%);
   color: #0f172a;
 }
 
 .header {
-  background: linear-gradient(135deg, #1d4ed8 0%, #6366f1 50%, #8b5cf6 100%);
+  max-width: 960px;
+  margin: 0 auto;
+  background: #ffffff;
   border-radius: 28px;
   padding: 48px 32px;
-  color: #ffffff;
-  box-shadow: 0 20px 45px rgba(15, 23, 42, 0.18);
+  color: #0f172a;
+  box-shadow: 0 20px 45px rgba(15, 23, 42, 0.1);
 }
 
 .headerContent {
@@ -26,27 +28,28 @@
   justify-content: center;
   padding: 6px 14px;
   border-radius: 999px;
-  background: rgba(15, 23, 42, 0.22);
-  color: #e0e7ff;
+  background: rgba(59, 130, 246, 0.12);
+  color: #1d4ed8;
   font-size: 0.85rem;
   margin-bottom: 16px;
-  box-shadow: inset 0 0 0 1px rgba(224, 231, 255, 0.24);
+  box-shadow: inset 0 0 0 1px rgba(59, 130, 246, 0.18);
 }
 
 .header h1 {
   font-size: 2.4rem;
   margin-bottom: 16px;
   font-weight: 700;
+  color: #0f172a;
 }
 
 .header p {
   font-size: 1.1rem;
   line-height: 1.9;
-  color: #e0e7ff;
+  color: #334155;
 }
 
 .section {
-  background: rgba(255, 255, 255, 0.92);
+  background: rgba(255, 255, 255, 0.96);
   border-radius: 24px;
   padding: 32px;
   max-width: 960px;

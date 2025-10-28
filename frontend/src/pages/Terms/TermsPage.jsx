@@ -157,7 +157,7 @@ const paymentNotes = [
 const TermsPage = () => {
   return (
     <main className={styles.page}>
-      <div className={styles.header}>
+      <header className={styles.header}>
         <div className={styles.headerContent}>
           <span className={styles.version}>نسخه ۱</span>
           <h1>شرایط و قوانین استفاده از خدمات بازچین</h1>
@@ -166,7 +166,7 @@ const TermsPage = () => {
             انتخاب گزینه موافقت با شرایط به معنای پذیرش کامل مفاد این توافق‌نامه است.
           </p>
         </div>
-      </div>
+      </header>
 
       <section className={styles.section}>
         <h2>مقدمه</h2>
