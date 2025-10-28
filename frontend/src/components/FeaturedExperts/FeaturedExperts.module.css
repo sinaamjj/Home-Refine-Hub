@@ -1,6 +1,10 @@
 .section {
   padding: 5rem 0;
-  background-image: var(--gradient-card);
+  background-image: linear-gradient(180deg, #FFFFFF, #F7F7F8);
+}
+
+:global(.dark) :local(.section) {
+  background-image: linear-gradient(180deg, #101014, #1D1D20);
 }
 
 .header {
@@ -30,17 +34,21 @@
 .subtitle {
   max-width: 32rem;
   margin: 0 auto;
-  color: hsl(var(--muted-foreground));
+  color: #71717A;
   font-size: 1.05rem;
   line-height: 1.8;
+}
+
+:global(.dark) :local(.subtitle) {
+  color: #A1A1AA;
 }
 
 .alert {
   max-width: 32rem;
   margin: 0 auto 2rem auto;
-  background-color: hsl(var(--destructive) / 0.1);
-  border: 1px solid hsl(var(--destructive) / 0.3);
-  color: hsl(var(--destructive));
+  background-color: #EF44441A;
+  border: 1px solid #EF44444D;
+  color: #EF4444;
   border-radius: var(--radius);
   padding: 1rem 1.25rem;
 }
@@ -76,10 +84,10 @@
 }
 
 .card {
-  background-color: hsl(var(--card));
+  background-color: #FFFFFF;
   border-radius: 1.5rem;
   overflow: hidden;
-  border: 1px solid hsl(var(--border) / 0.5);
+  border: 1px solid #E4E4E780;
   box-shadow: var(--shadow-soft);
   display: flex;
   flex-direction: column;
@@ -87,15 +95,24 @@
   transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
 }
 
+:global(.dark) :local(.card) {
+  background-color: #101014;
+  border: 1px solid #27272A80;
+}
+
 .card:hover {
-  border-color: hsl(var(--primary) / 0.5);
+  border-color: #16A34A80;
   box-shadow: var(--shadow-large);
   transform: translateY(-6px);
 }
 
 .imageWrapper {
   position: relative;
-  background-color: hsl(var(--muted));
+  background-color: #F4F4F5;
+}
+
+:global(.dark) :local(.imageWrapper) {
+  background-color: #27272A;
 }
 
 .imageContainer {
@@ -126,8 +143,8 @@
   display: inline-flex;
   align-items: center;
   gap: 0.35rem;
-  background-color: hsl(var(--primary) / 0.9);
-  color: hsl(var(--primary-foreground));
+  background-color: #16A34AE5;
+  color: #FFFFFF;
   padding: 0.25rem 0.65rem;
   border-radius: 9999px;
   font-size: 0.75rem;
@@ -149,9 +166,13 @@
 }
 
 .specialty {
-  color: hsl(var(--muted-foreground));
+  color: #71717A;
   font-size: 0.95rem;
   margin-bottom: 1rem;
+}
+
+:global(.dark) :local(.specialty) {
+  color: #A1A1AA;
 }
 
 .ratingRow {
@@ -171,7 +192,11 @@
 
 .ratingCount {
   font-size: 0.8rem;
-  color: hsl(var(--muted-foreground));
+  color: #71717A;
+}
+
+:global(.dark) :local(.ratingCount) {
+  color: #A1A1AA;
 }
 
 .location {
@@ -179,18 +204,26 @@
   align-items: center;
   gap: 0.4rem;
   font-size: 0.9rem;
-  color: hsl(var(--muted-foreground));
+  color: #71717A;
   margin-bottom: 1rem;
+}
+
+:global(.dark) :local(.location) {
+  color: #A1A1AA;
 }
 
 .description {
   font-size: 0.85rem;
-  color: hsl(var(--muted-foreground));
+  color: #71717A;
   margin-bottom: 1rem;
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
+}
+
+:global(.dark) :local(.description) {
+  color: #A1A1AA;
 }
 
 .tags {
@@ -206,10 +239,15 @@
   justify-content: center;
   padding: 0.35rem 0.75rem;
   border-radius: 9999px;
-  background-color: hsl(var(--muted));
-  color: hsl(var(--muted-foreground));
+  background-color: #F4F4F5;
+  color: #71717A;
   font-size: 0.75rem;
   font-weight: 500;
+}
+
+:global(.dark) :local(.tag) {
+  background-color: #27272A;
+  color: #A1A1AA;
 }
 
 .footer {
@@ -218,11 +256,15 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border-top: 1px solid hsl(var(--border) / 0.5);
+  border-top: 1px solid #E4E4E780;
+}
+
+:global(.dark) :local(.footer) {
+  border-top: 1px solid #27272A80;
 }
 
 .price {
-  color: hsl(var(--primary));
+  color: #16A34A;
   font-weight: 600;
   font-size: 0.95rem;
 }
@@ -230,25 +272,31 @@
 .outlineButton {
   padding: 0.5rem 1rem;
   border-radius: 9999px;
-  border: 1px solid hsl(var(--border));
-  background-color: hsl(var(--background));
-  color: hsl(var(--foreground));
+  border: 1px solid #E4E4E7;
+  background-color: #FFFFFF;
+  color: #09090B;
   font-size: 0.85rem;
   font-weight: 600;
   cursor: pointer;
   transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
 }
 
+:global(.dark) :local(.outlineButton) {
+  border: 1px solid #27272A;
+  background-color: #09090B;
+  color: #FAFAFA;
+}
+
 .outlineButton:hover {
-  background-color: hsl(var(--primary));
-  color: hsl(var(--primary-foreground));
-  border-color: hsl(var(--primary));
+  background-color: #16A34A;
+  color: #FFFFFF;
+  border-color: #16A34A;
 }
 
 .skeletonCard {
-  background-color: hsl(var(--card));
+  background-color: #FFFFFF;
   border-radius: 1.5rem;
-  border: 1px solid hsl(var(--border) / 0.5);
+  border: 1px solid #E4E4E780;
   box-shadow: var(--shadow-soft);
   padding: 1.25rem;
   display: flex;
@@ -256,21 +304,34 @@
   gap: 1rem;
 }
 
+:global(.dark) :local(.skeletonCard) {
+  background-color: #101014;
+  border: 1px solid #27272A80;
+}
+
 .skeletonBox {
   width: 100%;
   padding-top: 100%;
   border-radius: 1rem;
-  background: linear-gradient(90deg, hsl(var(--muted)) 25%, hsl(var(--muted) / 0.6) 50%, hsl(var(--muted)) 75%);
+  background: linear-gradient(90deg, #F4F4F5 25%, #F4F4F599 50%, #F4F4F5 75%);
   background-size: 200% 100%;
   animation: shimmer 1.5s infinite;
+}
+
+:global(.dark) :local(.skeletonBox) {
+  background: linear-gradient(90deg, #27272A 25%, #27272A99 50%, #27272A 75%);
 }
 
 .skeletonLine {
   height: 16px;
   border-radius: 9999px;
-  background: linear-gradient(90deg, hsl(var(--muted)) 25%, hsl(var(--muted) / 0.6) 50%, hsl(var(--muted)) 75%);
+  background: linear-gradient(90deg, #F4F4F5 25%, #F4F4F599 50%, #F4F4F5 75%);
   background-size: 200% 100%;
   animation: shimmer 1.5s infinite;
+}
+
+:global(.dark) :local(.skeletonLine) {
+  background: linear-gradient(90deg, #27272A 25%, #27272A99 50%, #27272A 75%);
 }
 
 .largeLine {
@@ -293,16 +354,31 @@
 .ctaButton {
   padding: 0.9rem 2.2rem;
   border-radius: 9999px;
-  border: 1px solid hsl(var(--border));
-  background-color: hsl(var(--background));
-  color: hsl(var(--foreground));
+  border: 1px solid #E4E4E7;
+  background-color: #FFFFFF;
+  color: #09090B;
   font-size: 1rem;
   font-weight: 600;
   cursor: pointer;
   transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
 }
 
+:global(.dark) :local(.ctaButton) {
+  border: 1px solid #27272A;
+  background-color: #09090B;
+  color: #FAFAFA;
+}
+
 .ctaButton:hover {
-  border-color: hsl(var(--primary));
-  color: hsl(var(--primary));
+  border-color: #16A34A;
+  color: #16A34A;
+}
+
+@keyframes shimmer {
+  from {
+    background-position: 200% 0;
+  }
+  to {
+    background-position: -200% 0;
+  }
 }
