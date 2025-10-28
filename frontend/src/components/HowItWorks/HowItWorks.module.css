@@ -1,6 +1,10 @@
 .section {
   padding: 5rem 0;
-  background-color: hsl(var(--background));
+  background-color: #FFFFFF;
+}
+
+:global(.dark) :local(.section) {
+  background-color: #09090B;
 }
 
 .header {
@@ -30,17 +34,21 @@
 .subtitle {
   max-width: 32rem;
   margin: 0 auto;
-  color: hsl(var(--muted-foreground));
+  color: #71717A;
   font-size: 1.05rem;
   line-height: 1.8;
+}
+
+:global(.dark) :local(.subtitle) {
+  color: #A1A1AA;
 }
 
 .alert {
   max-width: 32rem;
   margin: 0 auto 2rem auto;
-  background-color: hsl(var(--destructive) / 0.1);
-  border: 1px solid hsl(var(--destructive) / 0.3);
-  color: hsl(var(--destructive));
+  background-color: #EF44441A;
+  border: 1px solid #EF44444D;
+  color: #EF4444;
   border-radius: var(--radius);
   padding: 1rem 1.25rem;
 }
@@ -71,13 +79,18 @@
 
 .card {
   position: relative;
-  background-color: hsl(var(--card));
+  background-color: #FFFFFF;
   border-radius: 1.5rem;
   padding: 2rem;
-  border: 1px solid hsl(var(--border) / 0.5);
+  border: 1px solid #E4E4E780;
   box-shadow: var(--shadow-soft);
   text-align: center;
   transition: box-shadow 0.3s ease;
+}
+
+:global(.dark) :local(.card) {
+  background-color: #101014;
+  border: 1px solid #27272A80;
 }
 
 .card:hover {
@@ -92,8 +105,8 @@
   width: 3rem;
   height: 3rem;
   border-radius: 9999px;
-  background-image: var(--gradient-hero);
-  color: hsl(var(--primary-foreground));
+  background-image: linear-gradient(135deg, #16A34A, #36D399);
+  color: #FFFFFF;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -107,10 +120,14 @@
   height: 80px;
   margin: 2.5rem auto 1.5rem auto;
   border-radius: 24px;
-  background-color: hsl(var(--muted));
+  background-color: #F4F4F5;
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+:global(.dark) :local(.iconWrapper) {
+  background-color: #27272A;
 }
 
 .cardTitle {
@@ -120,8 +137,12 @@
 }
 
 .cardDescription {
-  color: hsl(var(--muted-foreground));
+  color: #71717A;
   line-height: 1.7;
+}
+
+:global(.dark) :local(.cardDescription) {
+  color: #A1A1AA;
 }
 
 .connector {
@@ -136,7 +157,7 @@
     left: 100%;
     width: 100%;
     height: 2px;
-    background: linear-gradient(to right, hsl(var(--primary) / 0.5), transparent);
+    background: linear-gradient(to right, #16A34A80, transparent);
     transform: translateY(-50%);
     z-index: 0;
   }
@@ -144,10 +165,10 @@
 
 .skeletonCard {
   position: relative;
-  background-color: hsl(var(--card));
+  background-color: #FFFFFF;
   border-radius: 1.5rem;
   padding: 2rem;
-  border: 1px solid hsl(var(--border) / 0.5);
+  border: 1px solid #E4E4E780;
   box-shadow: var(--shadow-soft);
   display: flex;
   flex-direction: column;
@@ -155,29 +176,55 @@
   gap: 1rem;
 }
 
+:global(.dark) :local(.skeletonCard) {
+  background-color: #101014;
+  border: 1px solid #27272A80;
+}
+
 .skeletonCircleLarge {
   width: 80px;
   height: 80px;
   border-radius: 24px;
-  background: linear-gradient(90deg, hsl(var(--muted)) 25%, hsl(var(--muted) / 0.6) 50%, hsl(var(--muted)) 75%);
+  background: linear-gradient(90deg, #F4F4F5 25%, #F4F4F599 50%, #F4F4F5 75%);
   background-size: 200% 100%;
   animation: shimmer 1.5s infinite;
+}
+
+:global(.dark) :local(.skeletonCircleLarge) {
+  background: linear-gradient(90deg, #27272A 25%, #27272A99 50%, #27272A 75%);
 }
 
 .skeletonCircleSmall {
   width: 48px;
   height: 48px;
   border-radius: 9999px;
-  background: linear-gradient(90deg, hsl(var(--muted)) 25%, hsl(var(--muted) / 0.6) 50%, hsl(var(--muted)) 75%);
+  background: linear-gradient(90deg, #F4F4F5 25%, #F4F4F599 50%, #F4F4F5 75%);
   background-size: 200% 100%;
   animation: shimmer 1.5s infinite;
+}
+
+:global(.dark) :local(.skeletonCircleSmall) {
+  background: linear-gradient(90deg, #27272A 25%, #27272A99 50%, #27272A 75%);
 }
 
 .skeletonLine {
   width: 80%;
   height: 16px;
   border-radius: 9999px;
-  background: linear-gradient(90deg, hsl(var(--muted)) 25%, hsl(var(--muted) / 0.6) 50%, hsl(var(--muted)) 75%);
+  background: linear-gradient(90deg, #F4F4F5 25%, #F4F4F599 50%, #F4F4F5 75%);
   background-size: 200% 100%;
   animation: shimmer 1.5s infinite;
+}
+
+:global(.dark) :local(.skeletonLine) {
+  background: linear-gradient(90deg, #27272A 25%, #27272A99 50%, #27272A 75%);
+}
+
+@keyframes shimmer {
+  from {
+    background-position: 200% 0;
+  }
+  to {
+    background-position: -200% 0;
+  }
 }
