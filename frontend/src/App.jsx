@@ -4,10 +4,12 @@ import Footer from "@/components/Footer/Footer";
 import RegistrationModal from "@/components/RegistrationModal/RegistrationModal";
 import HomePage from "@/pages/Home/HomePage";
 import RegisterPage from "@/pages/Register/RegisterPage";
+import TermsPage from "@/pages/Terms/TermsPage";
 import styles from "@/styles/Home.module.css";
 
 const VIEW_HOME = "home";
 const VIEW_REGISTER = "register";
+const VIEW_TERMS = "terms";
 
 const getInitialRoute = () => {
   if (typeof window === "undefined") {
@@ -19,6 +21,10 @@ const getInitialRoute = () => {
     const [, , rawRole] = path.split("/");
     const role = rawRole === "customer" ? "customer" : "professional";
     return { view: VIEW_REGISTER, role };
+  }
+
+  if (path === "/terms") {
+    return { view: VIEW_TERMS, role: "professional" };
   }
 
   return { view: VIEW_HOME, role: "professional" };
@@ -48,6 +54,12 @@ const App = () => {
             } else {
               window.history.pushState(state, "", targetPath);
             }
+          } else if (view === VIEW_TERMS) {
+            if (replace) {
+              window.history.replaceState(state, "", "/terms");
+            } else {
+              window.history.pushState(state, "", "/terms");
+            }
           } else {
             if (replace) {
               window.history.replaceState(state, "", "/");
@@ -72,6 +84,11 @@ const App = () => {
       const state = event.state;
       if (state?.view === VIEW_REGISTER) {
         setRoute({ view: VIEW_REGISTER, role: state.role ?? "professional" });
+        return;
+      }
+
+      if (state?.view === VIEW_TERMS) {
+        setRoute({ view: VIEW_TERMS, role: state.role ?? "professional" });
         return;
       }
 
@@ -146,6 +163,10 @@ const App = () => {
           onNavigateHome={handleNavigateHome}
         />
       );
+    }
+
+    if (route.view === VIEW_TERMS) {
+      return <TermsPage />;
     }
 
     return <HomePage />;

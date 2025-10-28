@@ -1,0 +1,162 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  padding: 120px 24px 72px;
+  background: linear-gradient(180deg, #0f172a 0%, #0f172a 12%, #f8fafc 12%, #ffffff 100%);
+  color: #0f172a;
+}
+
+.header {
+  background: linear-gradient(135deg, #1d4ed8 0%, #6366f1 50%, #8b5cf6 100%);
+  border-radius: 28px;
+  padding: 48px 32px;
+  color: #ffffff;
+  box-shadow: 0 20px 45px rgba(15, 23, 42, 0.18);
+}
+
+.headerContent {
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.version {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: rgba(15, 23, 42, 0.22);
+  color: #e0e7ff;
+  font-size: 0.85rem;
+  margin-bottom: 16px;
+  box-shadow: inset 0 0 0 1px rgba(224, 231, 255, 0.24);
+}
+
+.header h1 {
+  font-size: 2.4rem;
+  margin-bottom: 16px;
+  font-weight: 700;
+}
+
+.header p {
+  font-size: 1.1rem;
+  line-height: 1.9;
+  color: #e0e7ff;
+}
+
+.section {
+  background: rgba(255, 255, 255, 0.92);
+  border-radius: 24px;
+  padding: 32px;
+  max-width: 960px;
+  margin: 0 auto;
+  box-shadow: 0 14px 36px rgba(15, 23, 42, 0.08);
+  backdrop-filter: blur(8px);
+}
+
+.section + .section {
+  margin-top: 8px;
+}
+
+.section h2 {
+  font-size: 1.6rem;
+  margin-bottom: 16px;
+  color: #1d4ed8;
+}
+
+.section h3 {
+  font-size: 1.25rem;
+  margin: 24px 0 12px;
+  color: #334155;
+}
+
+.section p {
+  font-size: 1.05rem;
+  line-height: 2.1;
+  margin-bottom: 16px;
+  color: #1f2937;
+}
+
+.section ul,
+.section ol {
+  margin: 16px 0;
+  padding-right: 24px;
+  display: grid;
+  gap: 12px;
+  font-size: 1.02rem;
+  line-height: 1.9;
+  color: #1f2937;
+}
+
+.section ul li,
+.section ol li {
+  background: #f8fafc;
+  border-radius: 16px;
+  padding: 16px 20px;
+  box-shadow: inset 0 0 0 1px rgba(148, 163, 184, 0.25);
+}
+
+.section ul li strong {
+  color: #0f172a;
+}
+
+.footer {
+  max-width: 960px;
+  margin: 24px auto 0;
+  text-align: center;
+  color: #475569;
+  font-size: 0.95rem;
+}
+
+@media (max-width: 992px) {
+  .page {
+    padding: 110px 20px 64px;
+  }
+
+  .header {
+    padding: 40px 24px;
+  }
+
+  .header h1 {
+    font-size: 2.1rem;
+  }
+
+  .section {
+    padding: 28px 24px;
+  }
+}
+
+@media (max-width: 640px) {
+  .page {
+    padding: 96px 16px 56px;
+    gap: 24px;
+  }
+
+  .header {
+    padding: 32px 20px;
+    border-radius: 22px;
+  }
+
+  .header h1 {
+    font-size: 1.9rem;
+  }
+
+  .header p {
+    font-size: 1rem;
+  }
+
+  .section {
+    padding: 24px 20px;
+    border-radius: 20px;
+  }
+
+  .section p {
+    font-size: 0.98rem;
+  }
+
+  .section ul,
+  .section ol {
+    padding-right: 16px;
+  }
+}

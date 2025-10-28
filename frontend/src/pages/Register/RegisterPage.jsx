@@ -443,7 +443,12 @@ const RegisterPage = ({ role, onRoleChange, onNavigateHome }) => {
 
             <div className={styles.terms}>
               <input type="checkbox" id="terms" required />
-              <label htmlFor="terms">شرایط و قوانین استفاده از خدمات بازچین را می‌پذیرم.</label>
+              <label htmlFor="terms">
+                <a href="/terms" target="_blank" rel="noopener noreferrer">
+                  شرایط و قوانین
+                </a>{" "}
+                استفاده از خدمات بازچین را می‌پذیرم.
+              </label>
             </div>
 
             <button type="submit" className={styles.submitButton}>
